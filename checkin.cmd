@@ -1,3 +1,3 @@
 git add -A
-git commit -m "035411d..246857b "
+git commit -m "changed build struc"
 git push

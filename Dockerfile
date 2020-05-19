@@ -26,7 +26,8 @@ RUN git config --global url.git@github.com:.insteadOf https://github.com/ &&\
 
 RUN git clone https://github.com/albertito/chasquid.git && cd chasquid
 RUN go get -d ./...
-RUN go install ./...
+RUN make all &&\
+    chmod +x chasquid chasquid-util dovecot-auth-cli mda-lmtp smtp-check spf-check
 
 FROM quay.io/spivegin/tlmbasedebian
 RUN mkdir /opt/bin
@@ -45,10 +46,12 @@ RUN apt-get install -y -q \
 
 # Copy the binaries. This overrides the debian packages with the ones we just
 # built above.
-COPY --from=builder /opt/go/bin/chasquid /usr/bin/
-COPY --from=builder /opt/go/bin/chasquid-util /usr/bin/
-COPY --from=builder /opt/go/bin/smtp-check /usr/bin/
-COPY --from=builder /opt/go/bin/mda-lmtp /usr/bin/
+COPY --from=builder /opt/src/src/github.com/albertito/chasquid/chasquid /usr/bin/
+COPY --from=builder /opt/src/src/github.com/albertito/chasquid/chasquid-util /usr/bin/
+COPY --from=builder /opt/src/src/github.com/albertito/chasquid/smtp-check /usr/bin/
+COPY --from=builder /opt/src/src/github.com/albertito/chasquid/mda-lmtp /usr/bin/
+COPY --from=builder /opt/src/src/github.com/albertito/chasquid/dovecot-auth-cli /usr/bin/
+COPY --from=builder /opt/src/src/github.com/albertito/chasquid/spf-check /usr/bin/
 # Let chasquid bind privileged ports, so we can run it as its own user.
 RUN setcap CAP_NET_BIND_SERVICE=+eip /usr/bin/chasquid
 # Copy docker-specific configurations.
