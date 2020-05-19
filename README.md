@@ -1,0 +1,1 @@
+# Tricll SMTP Email container
