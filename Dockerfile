@@ -94,7 +94,7 @@ RUN ln -s /etc/letsencrypt/live/ /etc/chasquid/certs
 # letsencrypt is properly set up.
 # ENTRYPOINT ["/entrypoint.sh"]
 RUN chmod +x /entrypoint.sh
-CMD ["/entrypoint.sh"]
+CMD ["./entrypoint.sh"]
 # chasquid: SMTP, submission, submission+tls.
 EXPOSE 25 465 587
 
