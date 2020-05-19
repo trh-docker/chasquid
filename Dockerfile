@@ -30,7 +30,7 @@ RUN git config --global url.git@github.com:.insteadOf https://github.com/ &&\
 
 RUN git clone https://github.com/albertito/chasquid.git && cd chasquid && ls && $PWD
 RUN go get -d ./...
-RUN make all &&\
+RUN make && make all &&\
     chmod +x chasquid chasquid-util dovecot-auth-cli mda-lmtp smtp-check spf-check
 
 FROM quay.io/spivegin/tlmbasedebian
