@@ -17,7 +17,7 @@ RUN ssh-keyscan -H github.com > ~/.ssh/known_hosts &&\
 #COPY --from=gover /opt/go /opt/go
 ENV deploy=c1f18aefcb3d1074d5166520dbf4ac8d2e85bf41 \
     GO111MODULE=on \
-    GOPROXY=direct \
+    #GOPROXY=direct \
     GOSUMDB=off \
     GOPRIVATE=sc.tpnfc.us
     # GIT_TRACE_PACKET=1 \
