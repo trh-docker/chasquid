@@ -28,7 +28,7 @@ RUN git config --global url.git@github.com:.insteadOf https://github.com/ &&\
     git config --global url.git@gitea.com:.insteadOf https://gitea.com/ &&\
     git config --global url."https://${deploy}@sc.tpnfc.us/".insteadOf "https://sc.tpnfc.us/"
 
-RUN git clone https://github.com/albertito/chasquid.git && cd chasquid && ls 
+RUN git clone https://github.com/albertito/chasquid.git && cd chasquid && ls
 RUN go get -d ./...
 RUN make && make all &&\
     chmod +x chasquid chasquid-util dovecot-auth-cli mda-lmtp smtp-check spf-check
@@ -40,8 +40,7 @@ RUN mkdir /opt/bin
 ENV DEBIAN_FRONTEND noninteractive
 
 # Install the packages we need.
-# This includes chasq
-uid, which sets up good defaults.
+# This includes chasquid, which sets up good defaults.
 RUN apt-get update -q
 RUN apt-get install -y -q \
 	chasquid \
