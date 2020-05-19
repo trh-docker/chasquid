@@ -1,3 +1,3 @@
 git add -A
-git commit -m "fixed entry need to add chmod"
+git commit -m "changed base image"
 git push

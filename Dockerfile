@@ -32,7 +32,10 @@ RUN git clone https://github.com/albertito/chasquid.git && cd chasquid && ls &&\
     make && make all &&\
     chmod +x chasquid chasquid-util dovecot-auth-cli mda-lmtp smtp-check spf-check
 
-FROM quay.io/spivegin/tlmbasedebian
+# FROM quay.io/spivegin/tlmbasedebianFROM debian:stable
+# Create the image.
+FROM debian:stable
+
 RUN mkdir /opt/bin
 # Make debconf/frontend non-interactive, to avoid distracting output about the
 # lack of $TERM.
@@ -56,7 +59,7 @@ COPY --from=builder /opt/src/src/github.com/albertito/chasquid/mda-lmtp /usr/bin
 COPY --from=builder /opt/src/src/github.com/albertito/chasquid/dovecot-auth-cli /usr/bin/
 COPY --from=builder /opt/src/src/github.com/albertito/chasquid/spf-check /usr/bin/
 # Let chasquid bind privileged ports, so we can run it as its own user.
-#RUN setcap CAP_NET_BIND_SERVICE=+eip /usr/bin/chasquid
+RUN setcap CAP_NET_BIND_SERVICE=+eip /usr/bin/chasquid
 # Copy docker-specific configurations.
 COPY files/dovecot/dovecot.conf /etc/dovecot/dovecot.conf
 COPY files/chasquid/chasquid.conf /etc/chasquid/chasquid.conf
