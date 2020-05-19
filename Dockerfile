@@ -7,7 +7,7 @@ WORKDIR /opt/src/src/github.com/albertito/
 RUN apt-get update && apt-get install -y gcc gnupg2 tar git curl wget apt-transport-https ca-certificates build-essential &&\
     apt-get autoclean && apt-get autoremove &&\
     rm -rf /tmp/* /var/lib/apt/lists/* /var/tmp/*
-    
+
 RUN ssh-keygen -t rsa -N "" -f ~/.ssh/id_rsa && git config --global user.name "quadtone" && git config --global user.email "quadtone@txtsme.com"
 COPY --from=git /root/.ssh /root/.ssh
 RUN ssh-keyscan -H github.com > ~/.ssh/known_hosts &&\
@@ -28,7 +28,7 @@ RUN git config --global url.git@github.com:.insteadOf https://github.com/ &&\
     git config --global url.git@gitea.com:.insteadOf https://gitea.com/ &&\
     git config --global url."https://${deploy}@sc.tpnfc.us/".insteadOf "https://sc.tpnfc.us/"
 
-RUN git clone https://github.com/albertito/chasquid.git && cd chasquid
+RUN git clone https://github.com/albertito/chasquid.git && cd chasquid && ls && $PWD
 RUN go get -d ./...
 RUN make all &&\
     chmod +x chasquid chasquid-util dovecot-auth-cli mda-lmtp smtp-check spf-check
