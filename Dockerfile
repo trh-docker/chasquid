@@ -96,7 +96,8 @@ RUN ln -s /etc/letsencrypt/live/ /etc/chasquid/certs
 RUN chmod +x /entrypoint.sh
 CMD ["./entrypoint.sh"]
 # chasquid: SMTP, submission, submission+tls.
-EXPOSE 25 465 587
+# EXPOSE 25 465 587
+EXPOSE 543 465 587
 
 # dovecot: POP3s, IMAPs, managesieve.
 EXPOSE 993 995 4190
