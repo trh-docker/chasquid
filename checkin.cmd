@@ -1,3 +1,3 @@
 git add -A
-git commit -m "back to ours"
+git commit -m "removed submission "
 git push
