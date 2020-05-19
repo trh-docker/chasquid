@@ -1,3 +1,3 @@
 git add -A
-git commit -m "changed build struc"
+git commit -m "changed build tools for make"
 git push

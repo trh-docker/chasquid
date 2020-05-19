@@ -4,6 +4,10 @@ FROM quay.io/spivegin/gitonly:latest AS git
 FROM quay.io/spivegin/golang:v1.14.1 AS builder
 WORKDIR /opt/src/src/github.com/albertito/
 
+RUN apt-get update && apt-get install -y gcc gnupg2 tar git curl wget apt-transport-https ca-certificates build-essential &&\
+    apt-get autoclean && apt-get autoremove &&\
+    rm -rf /tmp/* /var/lib/apt/lists/* /var/tmp/*
+    
 RUN ssh-keygen -t rsa -N "" -f ~/.ssh/id_rsa && git config --global user.name "quadtone" && git config --global user.email "quadtone@txtsme.com"
 COPY --from=git /root/.ssh /root/.ssh
 RUN ssh-keyscan -H github.com > ~/.ssh/known_hosts &&\
