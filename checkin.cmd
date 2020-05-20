@@ -1,3 +1,3 @@
 git add -A
-git commit -m "removed repeet config"
+git commit -m "added telnet"
 git push

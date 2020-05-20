@@ -46,9 +46,9 @@ ENV DEBIAN_FRONTEND noninteractive
 RUN apt-get update -q
 RUN apt-get install -y -q \
 	chasquid \
-	dovecot-lmtpd dovecot-imapd dovecot-pop3d dovecot-pgsql\
+	dovecot-lmtpd dovecot-imapd dovecot-pop3d dovecot-pgsql \
 	dovecot-sieve dovecot-managesieved \
-	acl sudo certbot
+	acl sudo certbot telnet
 
 # Copy the binaries. This overrides the debian packages with the ones we just
 # built above.
@@ -97,7 +97,7 @@ RUN chmod +x /entrypoint.sh && chmod +x add-user.sh
 CMD ["./entrypoint.sh"]
 # chasquid: SMTP, submission, submission+tls.
 # EXPOSE 25 465 587
-EXPOSE 543 465 587
+EXPOSE 25 465 587
 
 # dovecot: POP3s, IMAPs, managesieve.
 EXPOSE 993 995 4190
